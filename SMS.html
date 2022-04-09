@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="SMS.js"></script>
+	<link rel="stylesheet" href="SMS.css">
+</head>
+
+<body>
+	<form id="register">
+		<fieldset>
+			<legend style="text-align:center"><strong>student info</strong></legend>
+			<strong>first name :</strong> <input type="text" name="firstname" id="firstname" required> <br>
+			<strong>last name :</strong> <input type="text" name="lastname" id="lastname" required> <br>
+			<strong>email :</strong> <input type="email" name="email" id="email"><br>
+			<strong>location :</strong> <input type="text" name="location" id="location"
+				placeholder="street, city, state"> <br>
+			<strong>phone :</strong> <input type="tel" name="phone" id="phone" pattern="[0-9]{10}"> <br>
+			<strong>communication :</strong> <input type="text" name="communication" id="communication"
+				placeholder="street, city, state"> <br>
+			<strong>permanent :</strong> <input type="text" name="permanent" id="permanent"
+				placeholder="state, country"> <br>
+			<strong>english :</strong> <input type="numbers" name="english" id="english" placeholder="0 ~ 100"> <br>
+			<strong>science :</strong> <input type="numbers" name="science" id="science" placeholder="0 ~ 100"> <br>
+			<strong>computers :</strong> <input type="numbers" name="computers" id="computers" placeholder="0 ~ 100">
+			<br>
+			<strong>hardware :</strong> <input type="numbers" name="hardware" id="hardware" placeholder="0 ~ 100"> <br>
+			<br>
+			<input type="submit" id="submit" value="Submit">
+		</fieldset>
+	</form>
+
+	<br>
+
+	<div class="options">
+		<strong>Rows:</strong>
+		<select id="dropdown" default="10">
+			<option value='10'>10</option>
+			<option value='20'>20</option>
+			<option value='50'>50</option>
+			<option value='100'>100</option>
+		</select>
+	</div>
+
+	<br>
+
+	<label for='id'><strong>ID :</strong></label>
+	<input type="number" id="id" min="0" max="200" />
+	<input type="button" id="details" value="Details" />
+	<input type="button" id="edit" value="Edit" />
+	<input type="button" id="delete" value="Delete" />
+
+	<br>
+	<br>
+
+	<input type="text" name="searchdata" id="searchdata" placeholder="search first name, last name, location, phone...">
+	<input type="button" id="search" value="Search" />
+
+	<br>
+	<br>
+
+	<table id="data" class="table">
+		<caption></caption>
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>first name</th>
+				<th>last name</th>
+				<th>email</th>
+				<th>location</th>
+				<th>phone</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<!-- insert data from jason file -->
+
+		</tbody>
+
+	</table>
+	<br>
+	<br>
+	<table id="detaildata" class="table">
+		<caption><strong>details</strong></caption>
+		<tbody>
+
+		</tbody>
+	</table>
+
+	<br>
+	<br>
+
+</body>
+
+</html>
