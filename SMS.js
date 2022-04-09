@@ -1,3 +1,5 @@
+/* load data from local file
+ */
 function loadData() {
 	$.get("jqueryassignmentdummydata.json", function (data) {
 		localStorage.setItem("data", JSON.stringify(data));
@@ -13,7 +15,8 @@ function loadData() {
 
 
 
-// show searching result on webpage
+/* show searching result on webpage
+*/
 function populateData(data, quantity) {
 
 	var tableBody = $('#data tbody');
@@ -53,9 +56,9 @@ function populateData(data, quantity) {
 
 
 
-
-
-
+/*
+ * 
+ */
 $(document).ready(function () {
 	// load data
 	var data = loadData();
@@ -80,17 +83,18 @@ $(document).ready(function () {
 
 
 
-	/* 
-	 * 
+	/* details button
+	 * show details based on id
 	 */
 	$("#details").click(function () {
+
 		var tableBody = $('#detaildata tbody');
 		// clear detail table
 		tableBody.empty();
 		var html = '';
 		var id = parseInt($("#id").val());
 
-		// show all users before filtering
+		// show all users
 		populateData(data, -1);
 
 		$("#data tbody tr").filter(function () {
@@ -111,6 +115,9 @@ $(document).ready(function () {
 
 
 
+
+
+
 	// delete
 	$("#delete").click(function () {
 		var id = parseInt($("#id").val());
@@ -119,6 +126,11 @@ $(document).ready(function () {
 		localStorage.setItem("data", JSON.stringify(data));
 		alert("Student ID " + id + " removed");
 	});
+
+
+
+
+
 
 	// submit
 	$("#submit").click(function () {
@@ -142,6 +154,9 @@ $(document).ready(function () {
 		data.push(newData);
 		localStorage.setItem("data", JSON.stringify(data));
 	});
+
+
+
 
 
 
@@ -190,25 +205,24 @@ $(document).ready(function () {
 
 	});
 
+
+
+
+
+
 	// search
 	$("#search").click(function () {
-
 		localStorage.getItem("data");
 		populateData(data, -1);
 		var searchdata = $("#searchdata").val().toLowerCase();
 		var table = $("#data tbody tr")
-
-
 		table.filter(function () {
 			$(this).toggle($(this).text().toLowerCase().indexOf(searchdata) > -1)
 		});
 
 	});
 	// drag and drop
-
 	document.addEventListener('dragstart', function (event) {
 		event.dataTransfer.setData('Text', [event.target.innerHTML,]);
 	});
-
-
 });
