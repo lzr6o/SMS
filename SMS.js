@@ -1,4 +1,5 @@
-/* load data from local file
+/* 
+ * load data from local file
  */
 function loadData() {
 	$.get("jqueryassignmentdummydata.json", function (data) {
@@ -15,38 +16,33 @@ function loadData() {
 
 
 
-/* show searching result on webpage
+/* 
+ * show limited searching result on webpage based on rows
 */
-function populateData(data, quantity) {
+function populateData(data, num) {
 
 	var tableBody = $('#data tbody');
 	var columns = ["id", "firstname", "lastname", "email", "location", "phone"];
-
 	var rows = 0;
 
+	// clear table
 	tableBody.empty();
 
-	//insert data into table
-	for (var rowKey in data) {
+	// insert data into a table view
+	// loop through json data
+	for (var key in data) {
 		const tr = document.createElement('tr');
-
-		var row = data[rowKey];
-
-		// add the rest of the fields
-		for (var j in columns) {
-			column = columns[j];
+		// get 
+		var row = data[key];
+		for (var i in columns) {
+			column = columns[i];
 			const td = document.createElement('td');
-			if (column != 'address' && column != 'marks') {
-				td.textContent = row[column];
-				tr.appendChild(td);
-			}
-
+			td.textContent = row[column];
+			tr.appendChild(td);
 		};
-
 		tableBody.append(tr);
-
 		rows += 1;
-		if (rows == quantity) {
+		if (rows == num) {
 			break;
 		}
 	};
@@ -83,20 +79,21 @@ $(document).ready(function () {
 
 
 
-	/* details button
-	 * show details based on id
+	/*
+	 * details button
+	 * show details based on id on webpage
 	 */
 	$("#details").click(function () {
 
 		var tableBody = $('#detaildata tbody');
 		// clear detail table
 		tableBody.empty();
+
 		var html = '';
+		// search id
 		var id = parseInt($("#id").val());
 
-		// show all users
-		populateData(data, -1);
-
+		// populate data only if id did exist
 		$("#data tbody tr").filter(function () {
 			$(this).toggle($(this).find("td:first").text() == id);
 		});
@@ -111,6 +108,7 @@ $(document).ready(function () {
 		} catch (err) {
 			alert("Student ID " + id + " not found.");
 		};
+
 	});
 
 
@@ -118,13 +116,15 @@ $(document).ready(function () {
 
 
 
-	// delete
+	/*
+	 * delete button
+	 * remove data from record based on id
+	 */
 	$("#delete").click(function () {
 		var id = parseInt($("#id").val());
 		delete data[id];
-		// 3. update data in localStorage
 		localStorage.setItem("data", JSON.stringify(data));
-		alert("Student ID " + id + " removed");
+		alert("Student ID " + id + " has been removed");
 	});
 
 
@@ -132,7 +132,10 @@ $(document).ready(function () {
 
 
 
-	// submit
+	/*
+	 * submit button
+	 * 
+	 */
 	$("#submit").click(function () {
 		var newData = {
 			"firstname": $("#firstname").val(),
@@ -160,7 +163,10 @@ $(document).ready(function () {
 
 
 
-	// edit
+	/* 
+	 * edit button
+	 * 
+	 */
 	$("#edit").click(function () {
 
 		var id = parseInt($("#id").val());
@@ -210,7 +216,10 @@ $(document).ready(function () {
 
 
 
-	// search
+	/*
+	 * search button
+	 * 
+	 */
 	$("#search").click(function () {
 		localStorage.getItem("data");
 		populateData(data, -1);
